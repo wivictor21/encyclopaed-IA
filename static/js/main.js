@@ -177,7 +177,7 @@ function renderArticle(data) {
         <span class="article-footer-note">
             Encyclopæd-IA Universalis · Vol. MMXXVI · Artículo: <em>${data.title}</em>
         </span>
-        <button class="back-to-search" onclick="exportPDF()">🖨 IMPRIMIR</button>
+        <!-- <button class="back-to-search" onclick="exportPDF()">🖨 IMPRIMIR</button> -->
         <button class="back-to-search" onclick="resetToLanding()">← NUEVA BÚSQUEDA</button>
     </div>`;
 
