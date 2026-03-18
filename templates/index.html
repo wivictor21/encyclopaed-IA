@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encyclopæd-IA Universalis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <!-- MASTHEAD -->
+    <header class="masthead">
+        <div class="masthead-top">
+            <div class="masthead-ornament">✦ ✦ ✦</div>
+            <div class="masthead-vol">Vol. MMXXVI · Edición Digital</div>
+            <div class="masthead-ornament">✦ ✦ ✦</div>
+        </div>
+        <div class="masthead-title-block">
+            <div class="masthead-rule"></div>
+            <a href="/" onclick="event.preventDefault(); resetToLanding()"
+                style="text-decoration:none; color:inherit; cursor:pointer">
+                <h1 class="masthead-title">Encyclopæd-IA</h1>
+            </a>
+            <h2 class="masthead-subtitle">UNIVERSALIS</h2>
+            <div class="masthead-tagline">Omnia Scientia · Todo el Conocimiento del Mundo</div>
+            <div class="masthead-rule"></div>
+        </div>
+        <div class="masthead-bottom">
+            <span>Fundada en la Tradición del Saber Universal</span>
+            <span class="separator">◆</span>
+            <span>Impulsada por Inteligencia Artificial</span>
+            <span class="separator">◆</span>
+            <span>Millones de Artículos</span>
+        </div>
+    </header>
+
+    <!-- SEARCH BAR -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-label">CONSULTAR LA ENCICLOPEDIA</div>
+            <div class="search-box">
+                <input type="text" id="search-input"
+                    placeholder="Escribe cualquier tema de cultura general... (ej: El Imperio Romano, La Gravitación, Mozart)"
+                    class="search-input">
+                <button id="search-btn" class="search-btn">
+                    <span class="search-btn-text">BUSCAR</span>
+                    <span class="search-btn-icon">→</span>
+                </button>
+            </div>
+            <div class="search-suggestions">
+                <span class="suggestion-label">Temas sugeridos:</span>
+                <span class="suggestion-tag" onclick="searchTopic('La Gran Muralla China')">La Gran Muralla China</span>
+                <span class="suggestion-tag" onclick="searchTopic('Teoría de la Relatividad')">Teoría de la
+                    Relatividad</span>
+                <span class="suggestion-tag" onclick="searchTopic('El Renacimiento')">El Renacimiento</span>
+                <span class="suggestion-tag" onclick="searchTopic('La Selva Amazónica')">La Selva Amazónica</span>
+                <span class="suggestion-tag" onclick="searchTopic('Mozart')">Mozart</span>
+                <span class="suggestion-tag" onclick="searchTopic('El Sistema Solar')">El Sistema Solar</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOADING STATE -->
+    <div id="loading" class="loading-overlay" style="display:none">
+        <div class="loading-inner">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Consultando los archivos del saber universal...</div>
+            <div class="loading-sub">Componiendo el artículo enciclopédico</div>
+        </div>
+    </div>
+
+    <!-- MAIN ARTICLE AREA -->
+    <main id="article-area" class="article-area" style="display:none">
+        <!-- Will be populated by JS -->
+    </main>
+
+    <!-- LANDING PAGE -->
+    <section id="landing" class="landing-section">
+        <div class="landing-grid">
+            <div class="featured-article">
+                <div class="featured-label">✦ Bienvenido a la Encicloped-IA ✦</div>
+                <h3 class="featured-title">El Conocimiento Universal al Alcance de Tu Mano</h3>
+                <p class="featured-text">Nuestra enciclopedia combina el clásico estilo editorial de las grandes obras
+                    impresas del siglo XX con el poder de la inteligencia artificial moderna. Cada artículo es generado
+                    en tiempo real con precisión académica, ilustrado con imágenes reales, y presentado con la dignidad
+                    que merece el conocimiento humano.</p>
+                <p class="featured-text">Escribe cualquier tema en el campo de búsqueda superior — historia, ciencia,
+                    arte, geografía, personajes ilustres, fenómenos naturales — y recibe al instante un artículo
+                    completo al estilo de las grandes enciclopedias ilustradas.</p>
+            </div>
+            <div class="category-list">
+                <h4 class="category-title">Áreas del Conocimiento</h4>
+                <div class="categories">
+                    <div class="category-item" onclick="searchRandom('Historia y Civilizaciones')">
+                        <span class="cat-icon">🏛️</span>
+                        <span class="cat-name">Historia & Civilizaciones</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Ciencias y Naturaleza')">
+                        <span class="cat-icon">⚛️</span>
+                        <span class="cat-name">Ciencias & Naturaleza</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Arte y Literatura')">
+                        <span class="cat-icon">🎨</span>
+                        <span class="cat-name">Arte & Literatura</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Geografía y Países')">
+                        <span class="cat-icon">🌍</span>
+                        <span class="cat-name">Geografía & Países</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Música y Cultura')">
+                        <span class="cat-icon">🎵</span>
+                        <span class="cat-name">Música & Cultura</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Tecnología e Inventos')">
+                        <span class="cat-icon">⚙️</span>
+                        <span class="cat-name">Tecnología & Inventos</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Filosofía y Pensamiento')">
+                        <span class="cat-icon">📜</span>
+                        <span class="cat-name">Filosofía & Pensamiento</span>
+                    </div>
+                    <div class="category-item" onclick="searchRandom('Astronomía y Cosmos')">
+                        <span class="cat-icon">🔭</span>
+                        <span class="cat-name">Astronomía & Cosmos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="decorative-divider">
+            <span class="div-line"></span>
+            <span class="div-ornament">❧ ENCYCLOPÆD-IA UNIVERSALIS ❧</span>
+            <span class="div-line"></span>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-title">ENCYCLOPÆD-IA UNIVERSALIS</div>
+            <div class="footer-text">© 2026 Victor Huertas. Todos los derechos reservados · Para uso educativo y
+                cultural libre</div>
+            <div class="footer-ornament">✦</div>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
