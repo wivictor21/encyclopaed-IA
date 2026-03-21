@@ -8,8 +8,9 @@ load_dotenv()
 app = Flask(__name__)
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY", "")
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 def get_pexels_images(query, count=6):
     try:
@@ -67,13 +68,13 @@ El artículo debe estar en español y seguir este formato JSON exacto:
 Responde ÚNICAMENTE con el JSON válido, sin texto adicional, sin bloques de código markdown."""
 
     response = requests.post(
-        OPENROUTER_URL,
+        GROQ_URL,
         headers={
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Authorization": f"Bearer {GROQ_API_KEY}",
             "Content-Type": "application/json"
         },
         json={
-            "model": "google/gemini-2.0-flash-001",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": prompt}],
             "temperature": 0.7,
             "max_tokens": 2000
@@ -140,13 +141,13 @@ def random_topic():
     category = data.get("category", "cultura general")
     
     response = requests.post(
-        OPENROUTER_URL,
+        GROQ_URL,
         headers={
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Authorization": f"Bearer {GROQ_API_KEY}",
             "Content-Type": "application/json"
         },
         json={
-            "model": "google/gemini-2.0-flash-001",
+            "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": f"Dame UN solo tema enciclopédico específico e interesante de la categoría '{category}'. Responde ÚNICAMENTE con el nombre del tema, sin explicación ni puntos."}],
             "temperature": 1.0,
             "max_tokens": 30
@@ -181,4 +182,4 @@ def export_pdf(topic):
                    headers={'Content-Disposition': f'attachment; filename="{topic}.pdf"'})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+    app.run(debug=True, port=5000)
